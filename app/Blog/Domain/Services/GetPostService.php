@@ -2,9 +2,10 @@
 
 namespace App\Blog\Domain\Services;
 
+use App\Core\Domain\Contracts\ServiceInterface;
 use App\Blog\Domain\Repositories\PostRepository;
 
-class GetPostService 
+class GetPostService implements ServiceInterface
 {
     protected $posts;
     protected $tags;

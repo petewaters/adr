@@ -3,11 +3,12 @@
 namespace App\Blog\Responders;
 
 use App\Blog\Domain\Models\Post;
+use App\Core\Contracts\Responders\ResponderInterface;
 
-class CreatePostResponder
+class CreatePostResponder implements ResponderInterface
 {
-    public function respond(Post $post)
+    public function respond($data)
     {
-        return response()->json($post, 200);
+        return response()->json($data, 200);
     }
 }
