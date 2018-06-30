@@ -19,11 +19,11 @@ class CreatePostAction
 
     public function __invoke(Request $request)
     {
-        return $this->responder->respond(
-            $this->service->handle($request->only([
-                'title',
-                'body',
-            ]))
-        );    
+        $post = $this->service->handle($request->only([
+            'title',
+            'body',
+        ]));
+
+        return $this->responder->with($post)->respond();    
     }
 }

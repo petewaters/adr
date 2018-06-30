@@ -19,8 +19,10 @@ class GetPostAction
 
     public function __invoke(int $postId, Request $request)
     {
-        return $this->responder->respond(
-            $this->service->handle($postId)
-        );    
+        return $this->responder->with(
+            $this->service->handle([
+                'postId' => $postId
+            ])
+        )->respond();    
     }
 }

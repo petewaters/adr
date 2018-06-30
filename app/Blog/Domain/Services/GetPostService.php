@@ -2,7 +2,7 @@
 
 namespace App\Blog\Domain\Services;
 
-use App\Core\Domain\Contracts\ServiceInterface;
+use App\Core\Contracts\Domain\ServiceInterface;
 use App\Blog\Domain\Repositories\PostRepository;
 
 class GetPostService implements ServiceInterface
@@ -15,9 +15,9 @@ class GetPostService implements ServiceInterface
         $this->posts = $posts;
     }
 
-    public function handle(int $postId)
+    public function handle($data = [])
     {
-        $post = $this->posts->get($postId);
+        $post = $this->posts->get($data['postId']);
 
         $post->load('tags');
 
