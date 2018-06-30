@@ -2,6 +2,7 @@
 
 namespace App\Blog\Domain\Models;
 
+use App\Blog\Domain\Models\Tag;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -18,8 +19,13 @@ class Post extends Model
 
         static::created(function ($post) {
             $post->update([
-                'slug' => str_slug($post->title),
+                'slug' => str_slug($post->title . ' ' . uniqid()),
             ]);
         });
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }
