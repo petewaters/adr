@@ -4,26 +4,26 @@ namespace App\Blog\Actions;
 
 use Illuminate\Http\Request;
 use App\Blog\Responders\CreatePostResponder;
-use App\Blog\Domain\Repositories\PostRepository;
+use App\Blog\Domain\Services\CreatePostService;
 
 class CreatePostAction 
 {
-    protected $posts;
     protected $responder;
+    protected $service;
 
-    public function __construct(PostRepository $posts, CreatePostResponder $responder)
+    public function __construct(CreatePostResponder $responder, CreatePostService $service)
     {
-        $this->posts = $posts;
         $this->responder = $responder;
+        $this->service = $service;
     }
 
     public function __invoke(Request $request)
     {
         return $this->responder->respond(
-            $this->posts->create($request->only([
+            $this->service->handle($request->only([
                 'title',
                 'body',
-            ])
-        ));    
+            ]))
+        );    
     }
 }
