@@ -6,7 +6,7 @@ use App\Blog\Domain\Payloads\BasePayload;
 use App\Core\Contracts\Domain\ServiceInterface;
 use App\Blog\Domain\Repositories\PostRepository;
 
-class GetPostService implements ServiceInterface
+class ListPostsService implements ServiceInterface
 {
     protected $posts;
     protected $tags;
@@ -18,9 +18,13 @@ class GetPostService implements ServiceInterface
 
     public function handle($data = [])
     {
-        $post = $this->posts->get($data['postId']);
-        $post->load('tags');
+        $posts = $this->posts->all();
 
-        return new BasePayload($post);
+        // Load the tags for each post
+        foreach ($posts as $post) {
+            $post->load('tags');
+        }
+            
+        return new BasePayload($posts);
     }
 }

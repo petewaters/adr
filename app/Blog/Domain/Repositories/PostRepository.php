@@ -6,6 +6,11 @@ use App\Blog\Domain\Models\Post;
 
 class PostRepository 
 {
+    public function all()
+    {
+        return Post::get();
+    }
+
     public function get(int $postId)
     {
         return Post::find($postId);

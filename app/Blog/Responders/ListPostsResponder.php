@@ -6,13 +6,10 @@ use App\Blog\Domain\Models\Post;
 use App\Core\Abstracts\Responder;
 use App\Core\Contracts\Responders\ResponderInterface;
 
-class CreatePostResponder extends Responder implements ResponderInterface
+class ListPostsResponder extends Responder implements ResponderInterface
 {
     public function respond()
     {
-        return response()->json(
-            $this->response->getData(), 
-            $this->response->getStatus()
-        );
+        return response()->json($this->response->getData(), $this->response->getStatus());
     }
 }
